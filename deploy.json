@@ -1,0 +1,43 @@
+{
+	"clearCache" : "true",
+	"packager" : {
+		"name" : "EasyPackage.Packagers.CopyPackager",
+		"settings" : "./connection",
+		"outputFolder" : "output"
+	},
+	"directories" : [
+		{
+			"path": "./test_files",
+			"uploadPath" : "",
+			"directories" : [
+				{
+					"path": "shaders",
+					"uploadPath" : "shaders",
+					"files" : [
+						{
+							"fileIn" : "default.fs",
+							"fileOut" : "default.fs.bin",
+							"processor" : "BubblePack.ShaderProcessor",
+							"settings" : {
+								"platform" : "windows",
+								"type" : "f"
+							}
+						},
+						{
+							"fileIn" : "default.vs",
+							"fileOut" : "default.vs.bin",
+							"processor" : "BubblePack.ShaderProcessor",
+							"settings" : {
+								"platform" : "windows",
+								"type" : "v"
+							}
+						}
+					
+					]
+				}
+			]
+		}
+	]
+
+
+}
