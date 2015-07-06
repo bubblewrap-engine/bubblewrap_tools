@@ -1,0 +1,3 @@
+[submodule "web-deploy"]
+	path = web-deploy
+	url = https://github.com/Dezzles/web-deploy.git
