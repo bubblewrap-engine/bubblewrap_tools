@@ -19,7 +19,7 @@ namespace BubbleWatch
 			ContentFolder = new Folder(Path + "/content");
 		}
 
-		public string Location { private get; set; }
+		public string Location { get; set; }
 
 		public override string ToString()
 		{

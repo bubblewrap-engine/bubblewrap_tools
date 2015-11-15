@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyPackage">
-      <HintPath>..\..\packager\EasyPackage.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +41,12 @@
   <ItemGroup>
     <Compile Include="ShaderProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\web-deploy\EasyPackage\EasyPackage.csproj">
+      <Project>{a6fa2fe9-ed52-4ffd-927a-c45ff27d5003}</Project>
+      <Name>EasyPackage</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

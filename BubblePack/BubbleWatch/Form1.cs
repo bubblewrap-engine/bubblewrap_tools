@@ -12,18 +12,24 @@ namespace BubbleWatch
 {
 	public partial class Form1 : Form
 	{
+		File CurrentFile { get; set; }
 		ImageList checkImages;
-		List<Project> Projects { get; set; }
 		public Form1()
 		{
 			InitializeComponent();
-			Projects = new List<Project>();
 			checkImages = new ImageList();
 			CheckBox cb = new CheckBox();
 
 			checkImages.Images.Add(GetImage("BubbleWatch.unselected.png"));
 			checkImages.Images.Add(GetImage("BubbleWatch.selected.png"));
 			fileTreeView.ImageList = checkImages;
+			UpdateFile();
+
+			ProjectManager.Load();
+			foreach (var p in ProjectManager.Projects)
+			{
+				lstProjects.Items.Add(p);
+			}
 		}
 
 		Image GetImage(string name )
@@ -40,16 +46,19 @@ namespace BubbleWatch
 			if ( folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
 				Project p = new Project(folderDialog.SelectedPath);
-				Projects.Add(p);
+				ProjectManager.Projects.Add(p);
 				lstProjects.Items.Add(p);
 				
+				ProjectManager.Save();
 			}
 		}
 
 		private void lstProjects_SelectedValueChanged(object sender, EventArgs e)
 		{
-			fileTreeView.Nodes.Clear();
 			Project p = lstProjects.SelectedItem as Project;
+			if (p == null)
+				return;
+			fileTreeView.Nodes.Clear();
 			AddFolder(null, p.ContentFolder);
 		}
 
@@ -76,10 +85,58 @@ namespace BubbleWatch
 
 		private void btnAddProcessor_Click(object sender, EventArgs e)
 		{
-			View.ProcessView pv = new View.ProcessView();
+			Process newProcess = new Process();
+			CurrentFile.Processes.Add(newProcess);
+			View.ProcessView pv = new View.ProcessView(newProcess);
 			processPanel.Controls.Add(pv);
 			pv.Dock = DockStyle.Top;
+			ProjectManager.Save();
 		}
 
+		private void fileTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			if (fileTreeView.SelectedNode is View.FileView)
+			{
+				File oldFile = ((View.FileView)fileTreeView.SelectedNode).InternalFile;
+				if (oldFile != CurrentFile)
+				{
+					CurrentFile = oldFile;
+					UpdateFile();
+				}
+			}
+			else
+			{
+				CurrentFile = null;
+				UpdateFile();
+			}
+		}
+
+		void UpdateFile()
+		{
+			processPanel.Controls.Clear();
+			btnAddProcessor.Enabled = false;
+			if (CurrentFile != null)
+			{
+				btnAddProcessor.Enabled = true;
+				foreach (Process p in CurrentFile.Processes)
+				{
+					View.ProcessView view = new View.ProcessView(p);
+					processPanel.Controls.Add(view);
+				}
+			}
+		}
+
+		private void btnBuild_Click(object sender, EventArgs e)
+		{
+			Project p = lstProjects.SelectedItem as Project;
+			if (p == null)
+				return;
+			ProjectManager.RunBuild(p, Output);
+		}
+
+		void Output(string output, object va, object vb)
+		{
+			textBox1.Text += string.Format(output, va, vb) + "\r\n";
+		}
 	}
 }

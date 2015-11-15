@@ -30,6 +30,8 @@
 		{
 			this.cbxProcessType = new System.Windows.Forms.ComboBox();
 			this.dgvSettings = new System.Windows.Forms.DataGridView();
+			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSettings)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -46,11 +48,34 @@
 			// 
 			// dgvSettings
 			// 
+			this.dgvSettings.AllowUserToAddRows = false;
+			this.dgvSettings.AllowUserToDeleteRows = false;
+			this.dgvSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.dgvSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colName,
+            this.colValue});
 			this.dgvSettings.Location = new System.Drawing.Point(4, 31);
 			this.dgvSettings.Name = "dgvSettings";
-			this.dgvSettings.Size = new System.Drawing.Size(374, 150);
+			this.dgvSettings.RowHeadersVisible = false;
+			this.dgvSettings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+			this.dgvSettings.Size = new System.Drawing.Size(374, 144);
 			this.dgvSettings.TabIndex = 1;
+			this.dgvSettings.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSettings_CellValueChanged);
+			// 
+			// colName
+			// 
+			this.colName.DataPropertyName = "Key";
+			this.colName.FillWeight = 34F;
+			this.colName.HeaderText = "Name";
+			this.colName.Name = "colName";
+			this.colName.ReadOnly = true;
+			// 
+			// colValue
+			// 
+			this.colValue.DataPropertyName = "Value";
+			this.colValue.HeaderText = "Value";
+			this.colValue.Name = "colValue";
 			// 
 			// ProcessView
 			// 
@@ -59,7 +84,7 @@
 			this.Controls.Add(this.dgvSettings);
 			this.Controls.Add(this.cbxProcessType);
 			this.Name = "ProcessView";
-			this.Size = new System.Drawing.Size(380, 228);
+			this.Size = new System.Drawing.Size(380, 178);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSettings)).EndInit();
 			this.ResumeLayout(false);
 
@@ -69,5 +94,7 @@
 
 		private System.Windows.Forms.ComboBox cbxProcessType;
 		private System.Windows.Forms.DataGridView dgvSettings;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
 	}
 }

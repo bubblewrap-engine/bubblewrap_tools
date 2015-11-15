@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyPackage">
-      <HintPath>..\..\packager\EasyPackage.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +59,7 @@
     <Compile Include="Process.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="ProjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\FileView.cs" />
     <Compile Include="View\FolderView.cs" />
@@ -82,6 +84,7 @@
     <EmbeddedResource Include="View\ProcessView.resx">
       <DependentUpon>ProcessView.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -98,6 +101,16 @@
   <ItemGroup>
     <EmbeddedResource Include="selected.png" />
     <EmbeddedResource Include="unselected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\web-deploy\EasyPackage\EasyPackage.csproj">
+      <Project>{a6fa2fe9-ed52-4ffd-927a-c45ff27d5003}</Project>
+      <Name>EasyPackage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BubblePack\BubblePack.csproj">
+      <Project>{a7b1a211-0ccd-4510-94ef-910a32d565e1}</Project>
+      <Name>BubblePack</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

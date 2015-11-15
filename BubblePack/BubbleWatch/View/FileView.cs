@@ -9,7 +9,7 @@ namespace BubbleWatch.View
 {
 	public class FileView : TreeNode
 	{
-		File InternalFile;
+		public File InternalFile { get; internal set; }
 		public FileView(File Internal)
 		{
 			InternalFile = Internal;

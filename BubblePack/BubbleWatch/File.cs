@@ -17,7 +17,7 @@ namespace BubbleWatch
 		}
 		public string Path { get; set; }
 		public string Filename { get; set; }
-
+		public DateTime TimeStamp { get; set; }
 		public List<Process> Processes { get; set;}
 	}
 }
